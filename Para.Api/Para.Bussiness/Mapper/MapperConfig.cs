@@ -9,16 +9,16 @@ public class MapperConfig : Profile
 
     public MapperConfig()
     {
-        CreateMap<Customer, CustomerResponse>();
-        CreateMap<CustomerRequest, Customer>();
+        CreateMap<Customer, CustomerResponse>().ReverseMap();
+        CreateMap<CustomerRequest, Customer>().ReverseMap();
         
-        CreateMap<CustomerAddress, CustomerAddressResponse>();
-        CreateMap<CustomerAddressRequest, CustomerAddress>();
+        CreateMap<CustomerAddress, CustomerAddressResponse>().ReverseMap();
+        CreateMap<CustomerAddressRequest, CustomerAddress>().ReverseMap();
         
-        CreateMap<CustomerPhone, CustomerPhoneResponse>();
-        CreateMap<CustomerPhoneRequest, CustomerPhone>();
+        CreateMap<CustomerPhone, CustomerPhoneResponse>().ReverseMap();
+        CreateMap<CustomerPhoneRequest, CustomerPhone>().ReverseMap();
         
-        CreateMap<CustomerDetail, CustomerDetailResponse>();
-        CreateMap<CustomerDetailRequest, CustomerDetail>();
+        CreateMap<CustomerDetail, CustomerDetailResponse>().ReverseMap();
+        CreateMap<CustomerDetailRequest, CustomerDetail>().ReverseMap();
     }
 }

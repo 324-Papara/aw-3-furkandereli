@@ -23,9 +23,7 @@ namespace Para.Bussiness.Validations
                 .WithMessage("Adressline maximum length 200 characters !");
 
             RuleFor(x => x.ZipCode)
-                .NotEmpty()
-                .Length(11)
-                .WithMessage("ZipCode must be 11 characters !");
+                .NotEmpty();
         }
     }
 }
