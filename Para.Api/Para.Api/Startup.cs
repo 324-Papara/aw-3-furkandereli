@@ -8,21 +8,20 @@ using Microsoft.OpenApi.Models;
 using Para.Bussiness;
 using Para.Bussiness.Cqrs;
 using Para.Data.Context;
-using Para.Data.UnitOfWork;
 
 namespace Para.Api;
 
 public class Startup
 {
     public IConfiguration Configuration;
-    
+
     public Startup(IConfiguration configuration)
     {
         this.Configuration = configuration;
     }
-        
+
     public void ConfigureServices(IServiceCollection services)
-    {            
+    {
         services.AddControllers()
             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()))
             .AddJsonOptions(options =>
@@ -37,9 +36,9 @@ public class Startup
         });
 
         var connectionStringSql = Configuration.GetConnectionString("MsSqlConnection");
-        services.AddDbContext<ParaDbContext>(options => options.UseSqlServer(connectionStringSql));  
+        services.AddDbContext<ParaDbContext>(options => options.UseSqlServer(connectionStringSql));
 
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        //services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         var config = new MapperConfiguration(cfg =>
         {
@@ -58,7 +57,7 @@ public class Startup
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Para.Api v1"));
         }
-        
+
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseAuthorization();

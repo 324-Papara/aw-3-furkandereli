@@ -8,11 +8,11 @@ using Para.Schema;
 
 namespace Para.Bussiness.Query;
 
-public class CustomerQueryHandler : 
-    IRequestHandler<GetAllCustomerQuery,ApiResponse<List<CustomerResponse>>>,
-    IRequestHandler<GetCustomerByIdQuery,ApiResponse<CustomerResponse>>,
-    IRequestHandler<GetCustomerByParametersQuery,ApiResponse<List<CustomerResponse>>>
-    
+public class CustomerQueryHandler :
+    IRequestHandler<GetAllCustomerQuery, ApiResponse<List<CustomerResponse>>>,
+    IRequestHandler<GetCustomerByIdQuery, ApiResponse<CustomerResponse>>,
+    IRequestHandler<GetCustomerByParametersQuery, ApiResponse<List<CustomerResponse>>>
+
 {
     private readonly IUnitOfWork unitOfWork;
     private readonly IMapper mapper;
@@ -22,7 +22,7 @@ public class CustomerQueryHandler :
         this.unitOfWork = unitOfWork;
         this.mapper = mapper;
     }
-    
+
     public async Task<ApiResponse<List<CustomerResponse>>> Handle(GetAllCustomerQuery request, CancellationToken cancellationToken)
     {
         List<Customer> entityList = await unitOfWork.CustomerRepository.GetAll();
