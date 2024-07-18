@@ -33,13 +33,13 @@ namespace Para.Api.Controllers
             return result;
         }
 
-        //[HttpGet("GetCustomerByParameters")]
-        //public async Task<ApiResponse<List<CustomerResponse>>> GetCustomerByParameters([FromQuery] long customerId, [FromQuery] string name, [FromQuery] string identityNumber)
-        //{
-        //    var operation = new GetCustomerByParametersQuery(customerId, name, identityNumber);
-        //    var result = await mediator.Send(operation);
-        //    return result;
-        //}
+        [HttpGet("GetCustomerByParameters")]
+        public async Task<ApiResponse<List<CustomerResponse>>> GetCustomerByParameters([FromQuery] long customerId, [FromQuery] string? name, [FromQuery] string? identityNumber)
+        {
+            var operation = new GetCustomerByParametersQuery(customerId, name, identityNumber);
+            var result = await mediator.Send(operation);
+            return result;
+        }
 
         [HttpPost]
         public async Task<ApiResponse<CustomerResponse>> Post([FromBody] CustomerRequest value)
