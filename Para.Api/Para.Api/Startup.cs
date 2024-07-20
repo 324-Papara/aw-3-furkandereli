@@ -1,10 +1,13 @@
+using System.Data;
 using System.Reflection;
 using System.Text.Json.Serialization;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Para.Api.Middlewares;
 using Para.Bussiness;
 using Para.Bussiness.Cqrs;
 using Para.Data.Context;
@@ -51,6 +54,7 @@ public class Startup
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+        app.UseMiddleware<RequestResponseLoggingMiddleware>();
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
@@ -61,6 +65,8 @@ public class Startup
         app.UseHttpsRedirection();
         app.UseRouting();
         app.UseAuthorization();
+
+
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
