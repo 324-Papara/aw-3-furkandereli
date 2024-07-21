@@ -7,7 +7,7 @@ namespace Para.Bussiness.Validations
     {
         public CustomerPhoneValidator()
         {
-            RuleFor(x => x.CountyCode)
+            RuleFor(x => x.CountryCode)
                 .NotEmpty()
                 .MinimumLength(3)
                 .WithMessage("Country Code must be minimum 3 characters !");

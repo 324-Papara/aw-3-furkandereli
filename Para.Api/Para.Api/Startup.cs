@@ -1,16 +1,8 @@
-using System.Data;
 using System.Reflection;
 using System.Text.Json.Serialization;
-using AutoMapper;
 using FluentValidation.AspNetCore;
-using MediatR;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Para.Api.Middlewares;
-using Para.Bussiness;
-using Para.Bussiness.Cqrs;
-using Para.Data.Context;
 
 namespace Para.Api;
 
@@ -37,19 +29,6 @@ public class Startup
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "Para.Api", Version = "v1" });
         });
-
-        var connectionStringSql = Configuration.GetConnectionString("MsSqlConnection");
-        services.AddDbContext<ParaDbContext>(options => options.UseSqlServer(connectionStringSql));
-
-        //services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-        var config = new MapperConfiguration(cfg =>
-        {
-            cfg.AddProfile(new MapperConfig());
-        });
-        services.AddSingleton(config.CreateMapper());
-
-        services.AddMediatR(typeof(CreateCustomerCommand).GetTypeInfo().Assembly);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

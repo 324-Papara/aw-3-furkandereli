@@ -8,6 +8,8 @@ public class CustomerAddressConfiguration : IEntityTypeConfiguration<CustomerAdd
 {
     public void Configure(EntityTypeBuilder<CustomerAddress> builder)
     {
+        builder.ToTable("CustomerAddresses");
+
         builder.Property(x => x.InsertDate).IsRequired(true);
         builder.Property(x => x.IsActive).IsRequired(true);
         builder.Property(x => x.InsertUser).IsRequired(true).HasMaxLength(50);

@@ -11,12 +11,8 @@ namespace Para.Data.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.EnsureSchema(
-                name: "dbo");
-
             migrationBuilder.CreateTable(
-                name: "Customer",
-                schema: "dbo",
+                name: "Customers",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -33,12 +29,11 @@ namespace Para.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Customer", x => x.Id);
+                    table.PrimaryKey("PK_Customers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CustomerAddress",
-                schema: "dbo",
+                name: "CustomerAddresses",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -55,19 +50,17 @@ namespace Para.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerAddress", x => x.Id);
+                    table.PrimaryKey("PK_CustomerAddresses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CustomerAddress_Customer_CustomerId",
+                        name: "FK_CustomerAddresses_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalSchema: "dbo",
-                        principalTable: "Customer",
+                        principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CustomerDetail",
-                schema: "dbo",
+                name: "CustomerDetails",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -76,7 +69,7 @@ namespace Para.Data.Migrations
                     FatherName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     MotherName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     EducationStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    MontlyIncome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MonthlyIncome = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Occupation = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     InsertUser = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     InsertDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -84,25 +77,23 @@ namespace Para.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerDetail", x => x.Id);
+                    table.PrimaryKey("PK_CustomerDetails", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CustomerDetail_Customer_CustomerId",
+                        name: "FK_CustomerDetails_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalSchema: "dbo",
-                        principalTable: "Customer",
+                        principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "CustomerPhone",
-                schema: "dbo",
+                name: "CustomerPhones",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CustomerId = table.Column<long>(type: "bigint", nullable: false),
-                    CountyCode = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
+                    CountryCode = table.Column<string>(type: "nvarchar(3)", maxLength: 3, nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     IsDefault = table.Column<bool>(type: "bit", nullable: false),
                     InsertUser = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -111,82 +102,70 @@ namespace Para.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CustomerPhone", x => x.Id);
+                    table.PrimaryKey("PK_CustomerPhones", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CustomerPhone_Customer_CustomerId",
+                        name: "FK_CustomerPhones_Customers_CustomerId",
                         column: x => x.CustomerId,
-                        principalSchema: "dbo",
-                        principalTable: "Customer",
+                        principalTable: "Customers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Customer_CustomerNumber",
-                schema: "dbo",
-                table: "Customer",
-                column: "CustomerNumber",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Customer_Email",
-                schema: "dbo",
-                table: "Customer",
-                column: "Email",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Customer_IdentityNumber",
-                schema: "dbo",
-                table: "Customer",
-                column: "IdentityNumber",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_CustomerAddress_CustomerId",
-                schema: "dbo",
-                table: "CustomerAddress",
+                name: "IX_CustomerAddresses_CustomerId",
+                table: "CustomerAddresses",
                 column: "CustomerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerDetail_CustomerId",
-                schema: "dbo",
-                table: "CustomerDetail",
+                name: "IX_CustomerDetails_CustomerId",
+                table: "CustomerDetails",
                 column: "CustomerId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerPhone_CountyCode_Phone",
-                schema: "dbo",
-                table: "CustomerPhone",
-                columns: new[] { "CountyCode", "Phone" },
+                name: "IX_CustomerPhones_CountryCode_Phone",
+                table: "CustomerPhones",
+                columns: new[] { "CountryCode", "Phone" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CustomerPhone_CustomerId",
-                schema: "dbo",
-                table: "CustomerPhone",
+                name: "IX_CustomerPhones_CustomerId",
+                table: "CustomerPhones",
                 column: "CustomerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_CustomerNumber",
+                table: "Customers",
+                column: "CustomerNumber",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_Email",
+                table: "Customers",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Customers_IdentityNumber",
+                table: "Customers",
+                column: "IdentityNumber",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CustomerAddress",
-                schema: "dbo");
+                name: "CustomerAddresses");
 
             migrationBuilder.DropTable(
-                name: "CustomerDetail",
-                schema: "dbo");
+                name: "CustomerDetails");
 
             migrationBuilder.DropTable(
-                name: "CustomerPhone",
-                schema: "dbo");
+                name: "CustomerPhones");
 
             migrationBuilder.DropTable(
-                name: "Customer",
-                schema: "dbo");
+                name: "Customers");
         }
     }
 }

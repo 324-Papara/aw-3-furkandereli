@@ -8,6 +8,8 @@ public class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
     {
+        builder.ToTable("Customers");
+
         builder.Property(x => x.InsertDate).IsRequired(true);
         builder.Property(x => x.IsActive).IsRequired(true);
         builder.Property(x => x.InsertUser).IsRequired(true).HasMaxLength(50);

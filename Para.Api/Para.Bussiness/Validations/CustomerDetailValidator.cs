@@ -15,7 +15,7 @@ namespace Para.Bussiness.Validations
                 .NotEmpty()
                 .MaximumLength(30);
 
-            RuleFor(x => x.MontlyIncome)
+            RuleFor(x => x.MonthlyIncome)
                 .NotEmpty()
                 .MaximumLength(10);
 

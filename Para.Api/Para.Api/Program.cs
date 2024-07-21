@@ -14,9 +14,10 @@ public class Program
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
         .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-        .ConfigureContainer<ContainerBuilder>(builder =>
+        .ConfigureContainer<ContainerBuilder>((context, builder) =>
         {
-            builder.RegisterModule(new AutofacBusinessModule());
+            var configuration = context.Configuration;
+            builder.RegisterModule(new AutofacBusinessModule(configuration));
         })
             .ConfigureWebHostDefaults(webBuilder =>
             {

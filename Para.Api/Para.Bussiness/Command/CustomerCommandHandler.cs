@@ -37,6 +37,8 @@ public class CustomerCommandHandler :
     {
         var mapped = mapper.Map<CustomerRequest, Customer>(request.Request);
         mapped.Id = request.CustomerId;
+        mapped.InsertUser = "System";
+        mapped.CustomerNumber = new Random().Next(1000000, 9999999);
         unitOfWork.CustomerRepository.Update(mapped);
         await unitOfWork.Complete();
         return new ApiResponse();

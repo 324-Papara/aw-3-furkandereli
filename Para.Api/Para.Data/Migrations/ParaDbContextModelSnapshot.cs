@@ -78,7 +78,7 @@ namespace Para.Data.Migrations
                     b.HasIndex("IdentityNumber")
                         .IsUnique();
 
-                    b.ToTable("Customer", "dbo");
+                    b.ToTable("Customers", (string)null);
                 });
 
             modelBuilder.Entity("Para.Data.Domain.CustomerAddress", b =>
@@ -129,7 +129,7 @@ namespace Para.Data.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.ToTable("CustomerAddress", "dbo");
+                    b.ToTable("CustomerAddresses", (string)null);
                 });
 
             modelBuilder.Entity("Para.Data.Domain.CustomerDetail", b =>
@@ -164,7 +164,7 @@ namespace Para.Data.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<string>("MontlyIncome")
+                    b.Property<string>("MonthlyIncome")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -184,7 +184,7 @@ namespace Para.Data.Migrations
                     b.HasIndex("CustomerId")
                         .IsUnique();
 
-                    b.ToTable("CustomerDetail", "dbo");
+                    b.ToTable("CustomerDetails", (string)null);
                 });
 
             modelBuilder.Entity("Para.Data.Domain.CustomerPhone", b =>
@@ -195,7 +195,7 @@ namespace Para.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<string>("CountyCode")
+                    b.Property<string>("CountryCode")
                         .IsRequired()
                         .HasMaxLength(3)
                         .HasColumnType("nvarchar(3)");
@@ -226,10 +226,10 @@ namespace Para.Data.Migrations
 
                     b.HasIndex("CustomerId");
 
-                    b.HasIndex("CountyCode", "Phone")
+                    b.HasIndex("CountryCode", "Phone")
                         .IsUnique();
 
-                    b.ToTable("CustomerPhone", "dbo");
+                    b.ToTable("CustomerPhones", (string)null);
                 });
 
             modelBuilder.Entity("Para.Data.Domain.CustomerAddress", b =>
